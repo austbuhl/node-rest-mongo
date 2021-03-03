@@ -5,10 +5,8 @@ const Post = require('../models/Post')
 router.get('/', (req, res) => {
   Post.find((err, data) => {
     if (err) {
-      console.log(err)
       res.status(500).send(err)
     } else {
-      console.log(data)
       res.status(200).json(data)
     }
   })
@@ -45,6 +43,18 @@ router.put('/:postId', (req, res) => {
       res.status(500).send(err)
     } else {
       res.status(200).json(data)
+    }
+  })
+})
+
+router.delete('/:postId', (req, res) => {
+  const postId = req.params.postId
+
+  Post.findByIdAndDelete(postId, (err, data) => {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send({ message: `Succesfully deleted post ${postId}` })
     }
   })
 })
