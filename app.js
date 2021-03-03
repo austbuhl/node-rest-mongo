@@ -1,5 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const postsRouter = require('./routes/posts')
+require('dotenv').config()
 
 const app = express()
 const PORT = process.env.PORT || 5000
@@ -8,11 +10,10 @@ app.get('/ping', (req, res) => {
   res.send('pong')
 })
 
-// DB Config
-const connectionUrl =
-  'mongodb+srv://admin:admin@cluster0.m7ejy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+app.use('/posts', postsRouter)
 
-mongoose.connect(connectionUrl, {
+// DB Config
+mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true
