@@ -1,15 +1,15 @@
+// --> app.js
 const express = require('express')
 const mongoose = require('mongoose')
-const postsRouter = require('./routes/posts')
 require('dotenv').config()
+const postsRouter = require('./routes/posts.routes')
 
-// Setup
+// Config
 const app = express()
 const PORT = process.env.PORT || 5000
 
 // Middleware
 app.use(express.json())
-app.use('/posts', postsRouter)
 
 // DB Connection
 mongoose.connect(process.env.MONGODB_URI, {
@@ -18,5 +18,8 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true
 })
 
-// Start server
+// Routes
+app.use('/posts', postsRouter)
+
+// Start Server
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))

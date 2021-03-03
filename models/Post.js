@@ -1,3 +1,5 @@
+// --> models/Post.js
+
 const mongoose = require('mongoose')
 
 const postSchema = mongoose.Schema({
@@ -5,7 +7,7 @@ const postSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  description: {
+  content: {
     type: String,
     required: true
   },
